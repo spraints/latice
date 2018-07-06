@@ -6,3 +6,5 @@ Latice
 2 of each color+shape
 
 12 wind tiles
+
+board is 9x9
