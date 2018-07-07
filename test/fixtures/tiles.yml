@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  game: one
+  identifier: MyString
+  player: one
+  pool: false
+  board_x: 1
+  board_y: 1
+
+two:
+  game: two
+  identifier: MyString
+  player: two
+  pool: false
+  board_x: 1
+  board_y: 1
