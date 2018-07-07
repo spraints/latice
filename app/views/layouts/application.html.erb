@@ -11,13 +11,15 @@
   </head>
 
   <body>
-    <% if logged_in? %>
     <div>
-      <b><%= current_user.handle %></b>
-      |
-      <%= link_to "Log out", session_path, method: :delete %>
+      <a href="/">Home</a>
+      <% if logged_in? %>
+        |
+        <b><%= current_user.handle %></b>
+        |
+        <%= link_to "Log out", session_path, method: :delete %>
+      <% end %>
     </div>
-    <% end %>
 
     <%= yield %>
   </body>

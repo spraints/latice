@@ -1,3 +1,17 @@
 <h1>Hi!</h1>
 
-<%= react_component "PlayArea", name: @name %>
+<%= link_to "Start a game", games_path, method: :post %>
+
+<h1>Games you're playing</h1>
+<ul>
+  <% @in_progress_games.each do |game| %>
+    <li><%= link_to game.identifier, game %></li>
+  <% end %>
+</ul>
+
+<h1>Games you can join</h1>
+<ul>
+  <% @pending_games.each do |game| %>
+    <li><%= link_to game.identifier, game %></li>
+  <% end %>
+</ul>
