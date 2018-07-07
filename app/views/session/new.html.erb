@@ -1,0 +1,8 @@
+<h1>Log in</h1>
+
+<%= flash[:error] %>
+<%= form_tag session_path, method: :put do %>
+  <%= label_tag :username, "Username" %>
+  <%= text_field_tag :username %>
+  <%= submit_tag "Log in" %>
+<% end %>
