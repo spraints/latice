@@ -1,1 +1,1 @@
-<%= debug game: @game.attributes, players: @game.players.map(&:attributes) %>
+<%= react_component "Game", url: url_for(format: :json) %>

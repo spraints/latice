@@ -14,5 +14,9 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.where(identifier: params[:id]).first
+    respond_to do |format|
+      format.html
+      format.json { render json: GameState.new(game: @game, current_user: current_user) }
+    end
   end
 end
