@@ -16,7 +16,7 @@ class Game extends React.Component {
   }
 
   async loadGame() {
-    const response = await fetch(this.props.url, {credentials: "same-origin"})
+    const response = await fetch(this.props.gameDataURL, {credentials: "same-origin"})
     const game = await response.json()
     window.LaticeGame = game
     this.setState({game, loaded: true})
@@ -58,7 +58,7 @@ class Game extends React.Component {
 }
 
 Game.propTypes = {
-  url: PropTypes.string
+  gameDataURL: PropTypes.string
 }
 
 export default Game
