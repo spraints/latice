@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-import PlayerSetup from "./PlayerSetup"
+import SetUpPlayers from "./SetUpPlayers"
 
 class Game extends React.Component {
   constructor(props) {
@@ -16,11 +16,12 @@ class Game extends React.Component {
   }
 
   async loadGame() {
-    console.log("loading " + this.props.url + " ...")
     const response = await fetch(this.props.url, {credentials: "same-origin"})
     const game = await response.json()
-    console.log(game)
+    window.LaticeGame = game
     this.setState({game, loaded: true})
+    // todo - replace this with a websocket
+    setTimeout(() => { this.loadGame() }, 1000)
   }
 
   get loading() {
@@ -31,6 +32,14 @@ class Game extends React.Component {
     return !this.loading && this.state.game.state == "pregame"
   }
 
+  get players() {
+    return this.state.game && this.state.game.players
+  }
+
+  get me() {
+    return this.state.game && this.state.game.current_user
+  }
+
   render() {
     if (this.loading) {
       return (
@@ -38,7 +47,7 @@ class Game extends React.Component {
       )
     } else if (this.pregame) {
       return (
-        <PlayerSetup players={this.state.game.players} me={this.state.current_user}/>
+        <SetUpPlayers players={this.players} me={this.me}/>
       )
     } else {
       return (
