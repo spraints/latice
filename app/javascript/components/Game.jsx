@@ -24,6 +24,24 @@ class Game extends React.Component {
     setTimeout(() => { this.loadGame() }, 1000)
   }
 
+  onJoin = async ({position}) => {
+    const csrfParam = document.getElementsByName("csrf-param")[0].content
+    const csrfToken = document.getElementsByName("csrf-token")[0].content
+
+    const body = new FormData()
+    body.append(csrfParam, csrfToken)
+    body.append('position', position)
+
+    const response = await fetch(this.props.joinGameURL, {
+      method: "POST",
+      // headers: {
+      //   'X-CSRF-Token': csrfToken
+      // },
+      body: body,
+      credentials: "same-origin"
+    })
+  }
+
   get loading() {
     return !this.state.loaded
   }
@@ -47,7 +65,7 @@ class Game extends React.Component {
       )
     } else if (this.pregame) {
       return (
-        <SetUpPlayers players={this.players} me={this.me}/>
+        <SetUpPlayers players={this.players} me={this.me} onJoin={this.onJoin} />
       )
     } else {
       return (
@@ -58,7 +76,8 @@ class Game extends React.Component {
 }
 
 Game.propTypes = {
-  gameDataURL: PropTypes.string
+  gameDataURL: PropTypes.string,
+  joinGameURL: PropTypes.string
 }
 
 export default Game

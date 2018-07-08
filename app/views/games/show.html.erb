@@ -1,1 +1,3 @@
-<%= react_component "Game", gameDataURL: url_for(format: :json) %>
+<%= react_component "Game",
+      gameDataURL: url_for(format: :json),
+      joinGameURL: game_players_path(@game) %>

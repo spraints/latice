@@ -9,6 +9,10 @@ class SetUpPlayer extends React.Component {
     return this.props.player == this.props.me
   }
 
+  onJoin = () => {
+    this.props.onJoin({position: this.props.position})
+  }
+
   render() {
     return (
       <div>
@@ -23,13 +27,9 @@ class SetUpPlayer extends React.Component {
       return (<div>(you)</div>) // todo - a leave button?
     }
     if (this.canJoin) {
-      return (
-        <div>
-          (todo - a "join" button)
-        </div>
-      )
+      return (<div onClick={this.onJoin}>JOIN!!</div>)
     }
-    return ""
+    return (<div>{this.props.player || "(empty)"}</div>)
   }
 }
 
