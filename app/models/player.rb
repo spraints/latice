@@ -4,5 +4,5 @@ class Player < ApplicationRecord
 
   validates :game_id, presence: true
   validates :user_id, presence: true
-  validates :position, presence: true, inclusion: { in: (1..4) }
+  validates :position, inclusion: { in: (1..4), allow_nil: true }
 end
