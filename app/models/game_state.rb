@@ -13,6 +13,7 @@ class GameState
         {
           position: player.position,
           user: player.user.handle,
+          ready: player.ready?,
         }
       },
     }.to_json(*x)
