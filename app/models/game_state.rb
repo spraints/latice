@@ -29,7 +29,7 @@ class GameState
     {}.tap do |urls|
       if current_player
         urls[:player] = "/games/#{game.to_param}/players/#{current_player.id}"
-      elsif game.state == "pregame"
+      elsif game.state == "pregame" && !game.full?
         urls[:join] = "/games/#{game.to_param}/players"
       end
     end
