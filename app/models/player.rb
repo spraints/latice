@@ -1,6 +1,7 @@
 class Player < ApplicationRecord
   belongs_to :user
   belongs_to :game
+  has_many :tiles
 
   validates :game_id, presence: true
   validates :user_id, presence: true
