@@ -6,3 +6,10 @@
   <%= text_field_tag :username %>
   <%= submit_tag "Log in" %>
 <% end %>
+
+<h4>Available users</h4>
+<ul>
+  <% User.all.each do |user| %>
+  <li><%= user.handle %></li>
+  <% end %>
+</ul>
