@@ -5,4 +5,7 @@ class Tile < ApplicationRecord
 
   belongs_to :game
   belongs_to :player, optional: true
+
+  scope :wind, -> { where(identifier: WIND) }
+  scope :not_wind, -> { where("identifier <> ?", WIND) }
 end
