@@ -1,5 +1,5 @@
 class GameStart
-  def start_if_all_ready(game)
+  def self.start_if_all_ready(game)
     new(game).start_if_all_ready
   end
 
@@ -9,16 +9,26 @@ class GameStart
 
   attr_reader :game
 
-  def start_if_all_ready
-    players = game.players.to_a
-    if players.all?(&:ready?)
-      game.state = "playing"
-      game.save!
+  def players
+    @players ||= game.players.to_a
+  end
 
-      players.shuffle.each_with_index do |player, i|
-        player.position = i + 1
-        player.save!
-      end
+  def start_if_all_ready
+    if players.all?(&:ready?)
+      set_state
+      assign_positions
+    end
+  end
+
+  def set_state
+    game.state = "playing"
+    game.save!
+  end
+
+  def assign_positions
+    players.shuffle.each_with_index do |player, i|
+      player.position = i + 1
+      player.save!
     end
   end
 end
