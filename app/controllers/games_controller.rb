@@ -7,8 +7,9 @@ class GamesController < ApplicationController
   end
 
   def create
-    game = Game.create
-    game.players.create user: current_user, position: 1
+    game = Game.create!
+    game.players.create! user: current_user
+    TileMaker.make_tiles! game
     redirect_to game
   end
 
