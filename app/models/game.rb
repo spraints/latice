@@ -1,5 +1,6 @@
 class Game < ApplicationRecord
   has_many :players
+  has_many :tiles
 
   scope :in_progress, -> { where("state = ? OR state = ?", "playing", "pregame") }
   scope :awaiting_players, -> { where(state: "pregame") }
