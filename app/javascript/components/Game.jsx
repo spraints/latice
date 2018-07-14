@@ -13,16 +13,18 @@ class Game extends React.Component {
   }
 
   componentDidMount() {
-    this.loadGame()
+    this.loadGame(true)
   }
 
-  async loadGame() {
+  async loadGame(poll = false) {
     const response = await fetch(this.props.url, {credentials: "same-origin"})
     const game = await response.json()
     window.LaticeGame = game
     this.setState({game, loaded: true})
-    // todo - replace this with a websocket
-    setTimeout(() => { this.loadGame() }, 1000)
+    if (poll) {
+      // todo - replace this with a websocket
+      setTimeout(() => { this.loadGame(poll) }, 1000)
+    }
   }
 
   get maybeOnJoin() {
@@ -51,8 +53,38 @@ class Game extends React.Component {
     await this.loadGame()
   }
 
+  get maybeOnReady() {
+    if (this.pregame && this.my_player && this.state.game.urls.ready && !this.my_player.ready) {
+      return this.onReady
+    }
+    return null
+  }
+
+  onReady = async () => {
+    this.setState({loaded: false})
+    await this.put(this.state.game.urls.ready)
+    await this.loadGame()
+  }
+
+  get maybeOnNotReady() {
+    if (this.pregame && this.my_player && this.state.game.urls.ready && this.my_player.ready) {
+      return this.onNotReady
+    }
+    return null
+  }
+
+  onNotReady = async () => {
+    this.setState({loaded: false})
+    await this.delete(this.state.game.urls.ready)
+    await this.loadGame()
+  }
+
   async post(url, data = {}) {
     await this.req("POST", url, data)
+  }
+
+  async put(url, data = {}) {
+    await this.req("PUT", url, data)
   }
 
   async delete(url) {
@@ -96,6 +128,10 @@ class Game extends React.Component {
     return this.loaded && this.state.game.current_user
   }
 
+  get my_player() {
+    return this.loaded && this.state.game.current_player
+  }
+
   render() {
     if (this.loading) {
       return (
@@ -105,7 +141,7 @@ class Game extends React.Component {
       return (
         <div>
           <h2>New Game</h2>
-          <SetUpPlayers players={this.players} me={this.me} onJoin={this.maybeOnJoin} onLeave={this.maybeOnLeave} />
+          <SetUpPlayers players={this.players} me={this.me} onJoin={this.maybeOnJoin} onLeave={this.maybeOnLeave} onReady={this.maybeOnReady} onNotReady={this.maybeOnNotReady} />
         </div>
       )
     } else {

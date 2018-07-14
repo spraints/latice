@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   get "/" => "games#index"
   resources :games do
-    resources :players
+    resources :players do
+      put "ready" => "players#ready", as: :ready
+      delete "ready" => "players#not_ready"
+    end
   end
 
   put "/session" => "session#create", as: :session

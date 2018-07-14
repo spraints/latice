@@ -17,6 +17,20 @@ class PlayersController < ApplicationController
     head :ok
   end
 
+  def ready
+    game.pregame!
+    player = game.players.find(params[:player_id])
+    player.ready = true
+    player.save!
+  end
+
+  def not_ready
+    game.pregame!
+    player = game.players.find(params[:player_id])
+    player.ready = false
+    player.save!
+  end
+
   private
 
   def game
