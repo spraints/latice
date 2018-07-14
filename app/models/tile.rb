@@ -8,4 +8,5 @@ class Tile < ApplicationRecord
 
   scope :wind, -> { where(identifier: WIND) }
   scope :not_wind, -> { where("identifier <> ?", WIND) }
+  scope :in_rack, -> { where("player_id IS NOT NULL AND NOT pool") }
 end

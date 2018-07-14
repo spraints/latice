@@ -58,6 +58,7 @@ class GameStart
 
     player_tiles.each do |player, tiles|
       Tile.where(id: tiles.map(&:id)).update_all player_id: player.id
+      Tile.where(id: tiles.shuffle.take(5).map(&:id)).update_all pool: false
     end
   end
 
