@@ -3,6 +3,11 @@ import PropTypes from "prop-types"
 
 import SetUpPlayers from "./SetUpPlayers"
 
+import TODO from "./TODO"
+const Opponents = TODO("Opponents")
+const Board = TODO("Board")
+const MyArea = TODO("MyArea")
+
 class Game extends React.Component {
   constructor(props) {
     super(props)
@@ -148,7 +153,9 @@ class Game extends React.Component {
       return (
         <div>
           <h2>Latice</h2>
-          <pre>{JSON.stringify(this.state, null, 2)}</pre>
+          <Opponents game={this.state.game} />
+          <Board game={this.state.game} />
+          <MyArea game={this.state.game} />
         </div>
       )
     }
