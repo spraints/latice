@@ -146,7 +146,10 @@ class Game extends React.Component {
       )
     } else {
       return (
-        <div>Let's go! {JSON.stringify(this.state)}</div>
+        <div>
+          <h2>Latice</h2>
+          <pre>{JSON.stringify(this.state, null, 2)}</pre>
+        </div>
       )
     }
   }
