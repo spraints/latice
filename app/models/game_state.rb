@@ -57,12 +57,32 @@ class GameState
   end
 
   def board_json
-    (1..9).map { |row|
-      {
-        row: row,
-        cells: (1..9).map { |col| {col: col} },
-      }
+    (1..9).map { |row| {
+      row: row,
+      cells: (1..9).map { |col| cell_json(row: row, col: col) },
+    } }
+  end
+
+  def cell_json(row:, col:)
+    {
+      row: row,
+      col: col,
+      sun: sun?(row: row, col: col),
+      moon: row == 5 && col == 5,
     }
+  end
+
+  def sun?(row:, col:)
+    case row
+    when 1, 9
+      col == 1 || col == 5 || col == 9
+    when 2, 8
+      col == 2 || col == 8
+    when 3, 7
+      col == 3 || col == 7
+    when 5
+      col == 1 || col == 9
+    end
   end
 
   def players

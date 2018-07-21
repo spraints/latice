@@ -1,7 +1,12 @@
 import React from 'react'
 
-const Cell = (props) => (<span>({props.col},{props.row})</span>)
-const Row = (props) => (<div>{props.cells.map(cell => <Cell key={cell.col} row={props.row} {...cell} />)}</div>)
+const Cell = (props) => {
+  if (props.sun) return <span className="cell sun">☀️</span>
+  if (props.moon) return <span className="cell moon">🌙</span>
+  return <span className="cell">⬜️</span>
+}
+
+const Row = (props) => (<div>{props.cells.map(cell => <Cell key={cell.col} {...cell} />)}</div>)
 
 export default (props) => {
   const board = props.game.board
