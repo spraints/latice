@@ -11,6 +11,7 @@ class GameState
       current_user: current_user.handle,
       current_player: current_player && player_json(current_player),
       players: players.map { |player| player_json(player) },
+      racked_tiles: current_player && current_player.tiles.in_rack.map { |tile| tile_json(tile) },
       urls: urls,
     }.to_json(*x)
   end
@@ -40,6 +41,17 @@ class GameState
       position: player.position,
       user: player.user.handle,
       ready: player.ready?,
+      tile_counts: {
+        in_rack: player.tiles.in_rack.size,
+        total: player.tiles.size,
+      },
+    }
+  end
+
+  def tile_json(tile)
+    {
+      id: tile.id,
+      identifier: tile.identifier,
     }
   end
 
