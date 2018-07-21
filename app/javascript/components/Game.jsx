@@ -4,9 +4,9 @@ import PropTypes from "prop-types"
 import SetUpPlayers from "./SetUpPlayers"
 
 import TODO from "./TODO"
-const Opponents = TODO("Opponents")
 const Board = TODO("Board")
-const MyArea = TODO("MyArea")
+const Opponents = TODO("Opponents")
+import MyArea from "./MyArea"
 
 class Game extends React.Component {
   constructor(props) {
