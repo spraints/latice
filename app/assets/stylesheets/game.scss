@@ -1,0 +1,22 @@
+.board {
+  display: table;
+  padding: 10px;
+  border: solid 1px black;
+  border-radius: 5px;
+}
+
+.board-row {
+  display: table-row;
+}
+
+.board-square {
+  display: table-cell;
+  $square_size: 50px;
+  width: $square_size;
+  height: $square_size;
+  padding: 5px;
+  border: solid 1px black;
+  font-size: 35px;
+  vertical-align: middle;
+  text-align: center;
+}
