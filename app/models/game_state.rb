@@ -53,6 +53,9 @@ class GameState
     {
       id: tile.id,
       identifier: tile.identifier,
+      is_wind: tile.wind?,
+      shape: tile.shape,
+      color: tile.color,
     }
   end
 
