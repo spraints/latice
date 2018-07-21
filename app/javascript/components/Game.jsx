@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 import SetUpPlayers from "./SetUpPlayers"
 
 import TODO from "./TODO"
-const Board = TODO("Board")
+import Board from "./Board"
 const Opponents = TODO("Opponents")
 import MyArea from "./MyArea"
 

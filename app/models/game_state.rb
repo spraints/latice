@@ -12,6 +12,7 @@ class GameState
       current_player: current_player && player_json(current_player),
       players: players.map { |player| player_json(player) },
       racked_tiles: current_player && current_player.tiles.in_rack.map { |tile| tile_json(tile) },
+      board: board_json,
       urls: urls,
     }.to_json(*x)
   end
@@ -52,6 +53,15 @@ class GameState
     {
       id: tile.id,
       identifier: tile.identifier,
+    }
+  end
+
+  def board_json
+    (1..9).map { |row|
+      {
+        row: row,
+        cells: (1..9).map { |col| {col: col} },
+      }
     }
   end
 
