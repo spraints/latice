@@ -153,8 +153,8 @@ class Game extends React.Component {
       return (
         <div>
           <h2>Latice</h2>
-          <Opponents game={this.state.game} />
           <Board game={this.state.game} />
+          <Opponents game={this.state.game} />
           <MyArea game={this.state.game} />
         </div>
       )
