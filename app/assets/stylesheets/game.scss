@@ -28,7 +28,8 @@ $square_padding: 10px;
   display: table-cell;
 }
 
-.board-square, .tile {
+.board-square,
+.tile {
   width: $square_size;
   height: $square_size;
   padding: $square_padding;
@@ -62,9 +63,21 @@ $square_padding: 10px;
   border-color: blue;
 }
 
-.yellow { background-color: rgb(181, 166, 7); }
-.navy { background-color: rgb(7, 35, 181); }
-.magenta { background-color: rgb(181, 7, 169); }
-.red { background-color: rgb(181, 7, 7); }
-.green { background-color: rgb(7, 181, 41); }
-.teal { background-color: rgb(7, 181, 166); }
+.yellow {
+  background-color: rgb(181, 166, 7);
+}
+.navy {
+  background-color: rgb(7, 35, 181);
+}
+.magenta {
+  background-color: rgb(181, 7, 169);
+}
+.red {
+  background-color: rgb(181, 7, 7);
+}
+.green {
+  background-color: rgb(7, 181, 41);
+}
+.teal {
+  background-color: rgb(7, 181, 166);
+}
