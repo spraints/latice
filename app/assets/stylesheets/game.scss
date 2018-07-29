@@ -1,3 +1,7 @@
+body {
+  font-family: sans-serif;
+}
+
 .board {
   display: table;
   padding: 10px;
@@ -9,9 +13,13 @@
   display: table-row;
 }
 
+$square_size: 50px;
+
 .board-square {
   display: table-cell;
-  $square_size: 50px;
+}
+
+.board-square, .tile {
   width: $square_size;
   height: $square_size;
   padding: 5px;
@@ -20,3 +28,17 @@
   vertical-align: middle;
   text-align: center;
 }
+
+.tile {
+  border-radius: 3px;
+  color: white;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+
+.yellow { background-color: rgb(181, 166, 7); }
+.navy { background-color: rgb(7, 35, 181); }
+.magenta { background-color: rgb(181, 7, 169); }
+.red { background-color: rgb(181, 7, 7); }
+.green { background-color: rgb(7, 181, 41); }
+.teal { background-color: rgb(7, 181, 166); }
