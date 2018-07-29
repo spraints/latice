@@ -15,8 +15,10 @@ const SHAPES = {
 
 const WIND = '💨'
 
-export default (props) => {
-  const classes = `tile ${props.identifier} ${props.color} ${props.shape}`
-  const content = props.is_wind ? WIND : `${SHAPES[props.shape]}`
-  return <div className={classes} data-id={props.id}>{content}</div>
+export default class Tile extends React.Component {
+  render() {
+    const classes = `tile ${this.props.identifier} ${this.props.color} ${this.props.shape}`
+    const content = this.props.is_wind ? WIND : `${SHAPES[this.props.shape]}`
+    return <div className={classes} data-id={this.props.id}>{content}</div>
+  }
 }
