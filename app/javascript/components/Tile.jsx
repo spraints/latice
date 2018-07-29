@@ -16,9 +16,22 @@ const SHAPES = {
 const WIND = '💨'
 
 export default class Tile extends React.Component {
+  onClick = () => {
+    if (this.props.onSelect) {
+      this.props.onSelect(this.props.id)
+    }
+  }
+
   render() {
-    const classes = classNames('tile', this.props.identifier, this.props.color, this.props.shape)
+    const classes = classNames(
+      'tile',
+      this.props.identifier,
+      this.props.color,
+      this.props.shape,
+      {
+        'selected': this.props.selected,
+    })
     const content = this.props.is_wind ? WIND : `${SHAPES[this.props.shape]}`
-    return <div className={classes} data-id={this.props.id}>{content}</div>
+    return <div className={classes} onClick={this.onClick}>{content}</div>
   }
 }

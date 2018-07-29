@@ -13,7 +13,8 @@ body {
   display: table-row;
 }
 
-$square_size: 50px;
+$square_size: 45px;
+$square_padding: 10px;
 
 .board-square {
   display: table-cell;
@@ -22,7 +23,7 @@ $square_size: 50px;
 .board-square, .tile {
   width: $square_size;
   height: $square_size;
-  padding: 5px;
+  padding: $square_padding;
   border: solid 1px black;
   font-size: 35px;
   vertical-align: middle;
@@ -34,6 +35,22 @@ $square_size: 50px;
   color: white;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
+  cursor: pointer;
+}
+
+.rack .tile:hover,
+.rack .tile.selected {
+  border-width: 6px;
+  padding: $square_padding - 5px;
+}
+
+.rack .tile:hover {
+  border-color: green;
+}
+
+.rack .tile.selected:hover,
+.rack .tile.selected {
+  border-color: blue;
 }
 
 .yellow { background-color: rgb(181, 166, 7); }
