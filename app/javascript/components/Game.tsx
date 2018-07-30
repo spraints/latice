@@ -63,7 +63,8 @@ type gameUrls = {
 }
 
 enum gameState {
-  PREGAME = 'pregame'
+  PREGAME = 'pregame',
+  PLAYING = 'playing'
 }
 
 class Game extends React.Component<props, state> {
