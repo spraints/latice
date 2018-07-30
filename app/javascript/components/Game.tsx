@@ -1,5 +1,4 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import * as React from 'react'
 
 import SetUpPlayers from './SetUpPlayers'
 
@@ -7,7 +6,67 @@ import Board from './Board'
 import Opponents from './Opponents'
 import MyArea from './MyArea'
 
-class Game extends React.Component {
+type props = {
+  url: string
+}
+
+type state = {
+  loaded: boolean
+  game: game
+}
+
+type game = {
+  state: gameState
+  current_user: string
+  current_player: player
+  players: Array<player>
+  racked_tiles: Array<tile>
+  board: board
+  urls: gameUrls
+}
+
+type player = {
+  id: number
+  position: number
+  user: string
+  ready: boolean
+  tile_counts: {
+    in_rack: number
+    total: number
+  }
+}
+
+type tile = {
+  id: number
+  identifier: string
+  is_wind: boolean
+  shape: string // todo an enum tileShape?
+  color: string // todo an enum tileColor?
+}
+
+type board = Array<boardRow>
+type boardRow = {
+  row: number
+  cells: Array<boardCell>
+}
+type boardCell = {
+  row: number
+  col: number
+  sun: boolean
+  moon: boolean
+}
+
+type gameUrls = {
+  join: string
+  player: string
+  ready: string
+}
+
+enum gameState {
+  PREGAME = 'pregame'
+}
+
+class Game extends React.Component<props, state> {
   constructor(props) {
     super(props)
     this.state = {
@@ -25,7 +84,7 @@ class Game extends React.Component {
       credentials: 'same-origin'
     })
     const game = await response.json()
-    window.LaticeGame = game
+    window['LaticeGame'] = game
     this.setState({game, loaded: true})
     if (poll) {
       // todo - replace this with a websocket
@@ -102,7 +161,7 @@ class Game extends React.Component {
   async req(method, url, data) {
     if (url === undefined) return
 
-    const csrfToken = document.getElementsByName('csrf-token')[0].content
+    const csrfToken = document.getElementsByName('csrf-token')[0]['content']
 
     const response = await fetch(url, {
       method: method,
@@ -168,10 +227,6 @@ class Game extends React.Component {
       )
     }
   }
-}
-
-Game.propTypes = {
-  url: PropTypes.string
 }
 
 export default Game
